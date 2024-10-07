@@ -79,7 +79,13 @@ function adicionarItem(evento) {
     containerBotoes.appendChild(botaoEditar);
 
     containerItemLista.appendChild(containerNomeDoItem);
-    containerItemLista.appendChild(containerBotoes)
+    containerItemLista.appendChild(containerBotoes);
+
+    const itemData = document.createElement("p");
+    itemData.innerText = `${new Date().toLocaleDateString("pt-BR", { weekday: "long" })} (${new Date().toLocaleDateString()}) às ${new Date().toLocaleTimeString("pt-BR", {hour: "numeric", minute: "numeric"})}`;
+    itemData.classList.add("texto-data");
+
     itemDaLista.appendChild(containerItemLista);
+    itemDaLista.appendChild(itemData);
     listaDeCompras.appendChild(itemDaLista);
 };
