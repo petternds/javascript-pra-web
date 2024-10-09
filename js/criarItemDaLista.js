@@ -1,3 +1,11 @@
+import {
+    excluirItem
+} from "./excluirItem.js";
+import {
+    verificarListaComprados
+} from "./verificarListaComprados.js";
+
+const listaDeCompras = document.getElementById("lista-de-compras");
 const listaComprados = document.getElementById("lista-comprados");
 let contador = 0;
 
@@ -27,13 +35,15 @@ export function criarItemDaLista(item) {
         if (checkboxInput.checked) {
             checkboxCustomizado.classList.add("checked");
             itemTitulo.style.textDecoration = "line-through";
-            listaComprados.appendChild(itemDaLista);
+            listaComprados.appendChild(itemDaLista)
         } else {
             checkboxCustomizado.classList.remove("checked");
             itemTitulo.style.textDecoration = "none";
-            listaDeCompras.append(itemDaLista);
+            listaDeCompras.appendChild(itemDaLista)
         }
-    });
+
+        verificarListaComprados(listaComprados)
+    })
 
     const checkboxCustomizado = document.createElement("div");
     checkboxCustomizado.classList.add("checkbox-customizado");
@@ -42,12 +52,12 @@ export function criarItemDaLista(item) {
     checkboxLabel.appendChild(checkboxCustomizado);
 
     containerCheckbox.appendChild(checkboxLabel);
-    containerNomeDoItem.appendChild(containerCheckbox);
+    containerNomeDoItem.appendChild(containerCheckbox)
 
     const nomeDoItem = document.createElement("p");
     nomeDoItem.id = "item-titulo";
     nomeDoItem.innerText = item;
-    containerNomeDoItem.appendChild(nomeDoItem);
+    containerNomeDoItem.appendChild(nomeDoItem)
 
     const containerBotoes = document.createElement("div");
     const botaoRemover = document.createElement("button");
@@ -57,11 +67,15 @@ export function criarItemDaLista(item) {
     imagemRemover.src = "img/delete.svg";
     imagemRemover.alt = "Remover";
 
+    botaoRemover.addEventListener("click", function () {
+        excluirItem(itemDaLista);
+    });
+
     botaoRemover.appendChild(imagemRemover);
     containerBotoes.appendChild(botaoRemover);
 
     const botaoEditar = document.createElement("button");
-    botaoEditar.classList.add("item-lista-button");
+    botaoEditar.classList.add("item-lista-button")
 
     const imagemEditar = document.createElement("img");
     imagemEditar.src = "img/edit.svg";
@@ -74,7 +88,7 @@ export function criarItemDaLista(item) {
     containerItemLista.appendChild(containerBotoes);
 
     const itemData = document.createElement("p");
-    itemData.innerText = `${new Date().toLocaleDateString("pt-BR", { weekday: "long" })} (${new Date().toLocaleDateString()}) às ${new Date().toLocaleTimeString("pt-BR", {hour: "numeric", minute: "numeric"})}`;
+    itemData.innerText = `${new Date().toLocaleDateString("pt-BR", { weekday: "long" })} (${new Date().toLocaleDateString()}) às ${new Date().toLocaleTimeString("pt-BR", { hour: "numeric", minute: "numeric" })}`;
     itemData.classList.add("texto-data");
 
     itemDaLista.appendChild(containerItemLista);
